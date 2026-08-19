@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfólio de Alef Rezzo dos Reis — tecnologia, dados, automação, IA e desenvolvimento de software." />
+  <title>Alef Rezzo dos Reis | Portfólio</title>
+
+  <style>
+    :root {
+      --blue: #3f3fe3;
+      --blue-2: #5151ee;
+      --blue-soft: #ececff;
+      --ink: #11131a;
+      --ink-2: #1b1e28;
+      --muted: #6b7080;
+      --paper: #f7f7f3;
+      --white: #ffffff;
+      --line: #e8e8e2;
+      --shadow: 0 16px 50px rgba(16, 18, 31, .10);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247, 247, 243, .88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(232, 232, 226, .8);
+    }
+    .topbar-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 850;
+      letter-spacing: -.03em;
+    }
+    .brand-mark {
+      width: 36px; height: 36px;
+      display: grid; place-items: center;
+      border-radius: 10px;
+      background: var(--blue);
+      color: var(--white);
+      font-weight: 900;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: .92rem;
+    }
+    .nav a:hover { color: var(--blue); }
+
+    .hero {
+      padding: 72px 0 42px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.28fr) minmax(220px, .62fr);
+      gap: 34px;
+      align-items: center;
+    }
+    .hero-copy {
+      padding: 14px 0 0;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: .92;
+      letter-spacing: -.065em;
+      margin: 22px 0 18px;
+      max-width: 860px;
+    }
+    h1 span { color: var(--blue); }
+    .hero-lead {
+      font-size: clamp(1.03rem, 1.6vw, 1.22rem);
+      color: #484d5a;
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-top: 20px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 13px;
+      border: 1px solid var(--line);
+      font-weight: 800;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(18,20,32,.08); }
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      border-color: var(--blue);
+    }
+    .btn-secondary { background: var(--white); }
+
+    .profile-card {
+      width: min(100%, 310px);
+      justify-self: end;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 350px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      position: relative;
+      isolation: isolate;
+    }
+    .profile-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(17,19,26,0) 38%, rgba(17,19,26,.95) 88%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .profile-photo {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: center;
+      background: #20222b;
+    }
+    .profile-overlay {
+      position: relative;
+      z-index: 2;
+      padding: 18px;
+      margin-top: -4px;
+    }
+    .profile-role {
+      color: #d5d5ff;
+      font-weight: 800;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+    .profile-name {
+      font-size: 1.25rem;
+      font-weight: 850;
+      line-height: 1.1;
+      margin-top: 6px;
+    }
+
+    .signal-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 26px;
+    }
+    .signal {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 16px;
+    }
+    .signal strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 3px;
+    }
+    .signal span {
+      color: var(--muted);
+      font-size: .84rem;
+    }
+
+    section { padding: 58px 0; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .section-kicker {
+      color: var(--blue);
+      font-size: .76rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 900;
+    }
+    h2 {
+      margin: 5px 0 0;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      letter-spacing: -.05em;
+      line-height: .98;
+    }
+    .section-sub {
+      margin: 9px 0 0;
+      max-width: 740px;
+      color: var(--muted);
+    }
+
+    /* YouTube-like project grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 30px 22px;
+    }
+    .video-card {
+      display: block;
+      group: true;
+      cursor: pointer;
+    }
+    .thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--ink-2);
+      box-shadow: 0 10px 28px rgba(17,19,26,.12);
+      border: 1px solid rgba(17,19,26,.08);
+    }
+    .thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.22));
+    }
+    .thumb-top,
+    .thumb-bottom {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      z-index: 2;
+    }
+    .thumb-top { top: 16px; }
+    .thumb-bottom { bottom: 16px; }
+    .thumb-badge {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      color: var(--ink);
+      font-size: .7rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .thumb-title {
+      color: #fff;
+      font-size: clamp(1.3rem, 2.4vw, 2.15rem);
+      line-height: .95;
+      font-weight: 950;
+      letter-spacing: -.055em;
+      max-width: 80%;
+    }
+    .thumb-watermark {
+      position: absolute;
+      right: 18px;
+      bottom: 14px;
+      color: rgba(255,255,255,.74);
+      font-weight: 900;
+      font-size: .74rem;
+      z-index: 2;
+    }
+    .card-body {
+      padding: 13px 2px 0;
+    }
+    .card-title {
+      font-size: 1.14rem;
+      font-weight: 900;
+      letter-spacing: -.02em;
+      margin: 0 0 4px;
+    }
+    .card-meta {
+      font-size: .85rem;
+      color: var(--muted);
+      margin: 0;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+    .tag {
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: #3433ae;
+      font-weight: 800;
+      font-size: .72rem;
+    }
+    .video-card:hover .thumb { transform: translateY(-2px); }
+    .thumb { transition: transform .2s ease; }
+
+    .featured .video-grid {
+      grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+
+    .secondary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .mini-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .mini-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .mini-thumb {
+      aspect-ratio: 16 / 9;
+      padding: 18px;
+      display: flex;
+      align-items: end;
+      font-weight: 950;
+      font-size: 1.25rem;
+      letter-spacing: -.04em;
+      background: #e9e9ff;
+    }
+    .mini-body { padding: 15px 16px 18px; }
+    .mini-title { margin: 0 0 4px; font-weight: 900; }
+    .mini-desc { margin: 0; color: var(--muted); font-size: .85rem; }
+
+    .why {
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 28px;
+      padding: 38px;
+      overflow: hidden;
+      position: relative;
+    }
+    .why::before {
+      content: "";
+      position: absolute;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: rgba(63,63,227,.26);
+      right: -120px; top: -160px;
+      filter: blur(5px);
+    }
+    .why-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 34px;
+      align-items: start;
+    }
+    .why h2 { color: white; }
+    .why-sub { color: #c7cad5; max-width: 720px; }
+    .fit-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .fit {
+      padding: 17px;
+      border: 1px solid rgba(255,255,255,.11);
+      background: rgba(255,255,255,.045);
+      border-radius: 16px;
+    }
+    .fit strong { display: block; margin-bottom: 4px; }
+    .fit span { color: #b8bcc8; font-size: .88rem; }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .tool {
+      background: #ffffff;
+      color: #171922;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-weight: 850;
+      font-size: .8rem;
+    }
+    .tool:hover {
+      background: var(--blue-soft);
+      color: #2d2ca8;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .about-box {
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 25px;
+      border-radius: 18px;
+    }
+    .about-box p { margin: 0; color: #4f5360; }
+    .about-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .about-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--blue);
+      margin-top: 9px;
+      flex: 0 0 auto;
+    }
+
+    footer {
+      padding: 28px 0 44px;
+      color: var(--muted);
+      font-size: .82rem;
+      border-top: 1px solid var(--line);
+    }
+    .footer-row {
+      display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .why-grid, .about { grid-template-columns: 1fr; }
+      .profile-card { width: min(100%, 340px); min-height: 390px; justify-self: center; }
+      .video-grid, .featured .video-grid { grid-template-columns: 1fr; }
+      .secondary-grid { grid-template-columns: 1fr; }
+      .signal-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .container { width: min(var(--max), calc(100% - 24px)); }
+      .nav a:nth-child(2), .nav a:nth-child(3) { display: none; }
+      .hero { padding-top: 42px; }
+      h1 { font-size: clamp(2.8rem, 14vw, 4.3rem); }
+      .why { padding: 26px; border-radius: 22px; }
+      .section-head { display: block; }
+      .section-head .right { margin-top: 10px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#top" class="brand">
+        <span class="brand-mark">AR</span>
+        <span>Alef Rezzo dos Reis</span>
+      </a>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#projetos">Projetos</a>
+        <a href="#extras">Mais</a>
+        <a href="#fit">Aderência</a>
+        <a href="#sobre">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">Portfólio pessoal</div>
+            <h1>Dados que viram <span>produto.</span><br>IA que vira <span>processo.</span></h1>
+            <p class="hero-lead">
+              Sou Analista de Sistemas, graduando em Engenharia da Computação, com experiência em
+              desenvolvimento de software, integração de sistemas, dados, automação e infraestrutura.
+              Aqui estão alguns projetos que representam a forma como gosto de aprender: construindo,
+              testando e transformando problemas em soluções.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="https://github.com/alef-reis" target="_blank" rel="noreferrer">GitHub ↗</a>
+              <a class="btn btn-secondary" href="https://www.linkedin.com/in/alef-reis" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+              <a class="btn btn-secondary" href="#projetos">Ver projetos ↓</a>
+            </div>
+
+            <div class="signal-row" aria-label="Principais competências">
+              <div class="signal"><strong>Dados & ETL</strong><span>tratamento, análise e transformação</span></div>
+              <div class="signal"><strong>Automação & IA</strong><span>fluxos, ferramentas e produtividade</span></div>
+              <div class="signal"><strong>Software</strong><span>web, APIs, lógica e integração</span></div>
+            </div>
+          </div>
+
+          <aside class="profile-card" aria-label="Perfil">
+            <img class="profile-photo" src="https://media.licdn.com/dms/image/v2/D4D03AQHLXVPrRsiDoA/profile-displayphoto-crop_800_800/B4DZ.5IAKGJwAI-/0/1785517314311?e=1788998400&v=beta&t=XWZzd07Sq1CxUcugxFJ9Tg7EKnV2wWDcQ2bGpIcdsRI" alt="Foto profissional de Alef Rezzo dos Reis">
+            <div class="profile-overlay">
+              <div class="profile-role">Analista de Sistemas</div>
+              <div class="profile-name">Tecnologia • Dados • Automação • IA</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos" class="featured">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Projetos em destaque</div>
+            <h2>Meu “feed” de projetos.</h2>
+            <p class="section-sub">
+              Um formato inspirado no YouTube para facilitar a conversa: cada thumbnail é um projeto,
+              e cada clique leva direto para a aplicação, estudo ou material.
+            </p>
+          </div>
+        </div>
+
+        <div class="video-grid">
+          <a class="video-card" href="https://autocompara-sable.vercel.app/" target="_blank" rel="noreferrer">
+            <div class="thumb" style="background: linear-gradient(135deg, #161924 0%, #3233c6 58%, #6262ff 100%);">
+              <div class="thumb-top"><span class="thumb-badge">Generation Brasil • Data</span></div>
+              <div class="thumb-bottom">
+                <div class="thumb-title">COMPARE.<br>DECIDA.<br>DIRIJA.</div>
+              </div>
+              <div class="thumb-watermark">AUTO COMPARA</div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">AutoCompara — ETL + análise para decisão</h3>
+              <p class="card-meta">Projeto desenvolvido na Generation Brasil a partir de dados de carros emplacados de 2020 a 2025.</p>
+              <div class="card-tags">
+                <span class="tag">ETL</span>
+                <span class="tag">Dados</span>
+                <span class="tag">Análise</span>
+                <span class="tag">Produto Web</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="video-card" href="https://mindmap-ghost.netlify.app/app" target="_blank" rel="noreferrer">
+            <div class="thumb" style="background:
+              radial-gradient(circle at 76% 23%, rgba(119,119,255,.75), transparent 28%),
+              radial-gradient(circle at 35% 64%, rgba(63,63,227,.9), transparent 24%),
+              linear-gradient(135deg, #10121b 0%, #23254d 100%);">
+              <div class="thumb-top"><span class="thumb-badge">Automação • IA</span></div>
+              <div class="thumb-bottom">
+                <div class="thumb-title">DO PROMPT<br>AO MAPA.</div>
+              </div>
+              <div class="thumb-watermark">GHOST MAPPING</div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">MindMap Ghost — ideias virando mapas visuais</h3>
+              <p class="card-meta">Ferramenta para transformar um roteiro gerado por IA em um mapa mental pronto para apresentação ou vídeo.</p>
+              <div class="card-tags">
+                <span class="tag">IA</span>
+                <span class="tag">Automação</span>
+                <span class="tag">UX</span>
+                <span class="tag">Produtividade</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="video-card" href="https://estudodecaso-efeitofancy-22ndwiuvnzykyd8hqfreyt.streamlit.app/" target="_blank" rel="noreferrer">
+            <div class="thumb" style="background: linear-gradient(135deg, #1a1b23 0%, #4850aa 54%, #8a8bff 100%);">
+              <div class="thumb-top"><span class="thumb-badge">Estudo de caso • Streamlit</span></div>
+              <div class="thumb-bottom">
+                <div class="thumb-title">EFEITO<br>FANCY</div>
+              </div>
+              <div class="thumb-watermark">GOURMETBOX</div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Efeito Fancy — quando o premium cresce em plena inflação</h3>
+              <p class="card-meta">Investigação de um comportamento curioso de consumo em conjunto com Maria Aguiar, da Generation.</p>
+              <div class="card-tags">
+                <span class="tag">Análise de Dados</span>
+                <span class="tag">Hipóteses</span>
+                <span class="tag">Storytelling</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="video-card" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQbQKior_3ifQKCRko-ZcR8HT4jFeEBr59JE3hHms0AxgGkLDnoor0NkwBO-R2yxBLG_9objTQrNAjW/pubhtml" target="_blank" rel="noreferrer">
+            <div class="thumb" style="background: linear-gradient(135deg, #1c1f24 0%, #4f5562 55%, #858da0 100%);">
+              <div class="thumb-top"><span class="thumb-badge">Google Sheets • Prática</span></div>
+              <div class="thumb-bottom">
+                <div class="thumb-title">FÓRMULAS<br>QUE RESOLVEM.</div>
+              </div>
+              <div class="thumb-watermark">DATA WORK</div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Desafio prático de fórmulas no Google Sheets</h3>
+              <p class="card-meta">Exercício focado em raciocínio lógico, tratamento de dados e construção de soluções com fórmulas.</p>
+              <div class="card-tags">
+                <span class="tag">Google Sheets</span>
+                <span class="tag">Lógica</span>
+                <span class="tag">Dados</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="extras">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Mais projetos & experimentos</div>
+            <h2>Além dos projetos em destaque.</h2>
+            <p class="section-sub">
+              Outros materiais que mostram estudos, experimentações e a forma como incorporo tecnologia e IA ao meu trabalho.
+            </p>
+          </div>
+        </div>
+
+        <div class="secondary-grid">
+          <a class="mini-card" href="https://drive.google.com/file/d/1S-NA-R7PME0VC09VXM92fC0tFQACtd0L/view?usp=sharing" target="_blank" rel="noreferrer">
+            <div class="mini-thumb">GUIA UNIVERSAL<br>DE DESENVOLVIMENTO<br>AGÊNTICO</div>
+            <div class="mini-body">
+              <h3 class="mini-title">Full-Stack Multi-Stack</h3>
+              <p class="mini-desc">Material de referência para desenvolvimento agêntico, conectando IA, software e fluxo de trabalho.</p>
+            </div>
+          </a>
+
+          <div class="mini-card">
+            <div class="mini-thumb" style="background:#ececff;color:#1b1e28;">IA COMO<br>PARTE DO<br>WORKFLOW</div>
+            <div class="mini-body">
+              <h3 class="mini-title">Ferramentas de IA que uso</h3>
+              <p class="mini-desc">Uso IA como camada de pesquisa, raciocínio, desenvolvimento, criação e automação — não só como chatbot.</p>
+            </div>
+          </div>
+
+          <a class="mini-card" href="https://github.com/alef-reis" target="_blank" rel="noreferrer">
+            <div class="mini-thumb" style="background:#1a1b23;color:#fff;">MAIS<br>PROJETOS<br>NO GITHUB ↗</div>
+            <div class="mini-body">
+              <h3 class="mini-title">Código e experimentos</h3>
+              <p class="mini-desc">Repositórios, estudos e projetos em evolução.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="fit">
+      <div class="container">
+        <div class="why">
+          <div class="why-grid">
+            <div>
+              <div class="section-kicker" style="color:#a5a5ff;">Como eu trabalho</div>
+              <h2>Três frentes. Uma mesma forma de pensar.</h2>
+              <p class="why-sub">
+                Para a conversa com a liderança, a ideia é mostrar menos “lista de tecnologias” e mais
+                evidências de comportamento: investigar problemas, trabalhar com dados, automatizar tarefas
+                e construir soluções que alguém consegue usar.
+              </p>
+
+              <div class="tools" aria-label="Ferramentas de IA utilizadas">
+                <span class="tool">Claude</span>
+                <span class="tool">Grok</span>
+                <span class="tool">GPT</span>
+                <span class="tool">Gemini</span>
+                <span class="tool">Higgsfield</span>
+                <span class="tool">Recraft</span>
+                <span class="tool">MiniMax</span>
+                <span class="tool">Inner AI</span>
+              </div>
+            </div>
+
+            <div class="fit-grid">
+              <div class="fit">
+                <strong>Automação, Dados e IA</strong>
+                <span>ETL, tratamento de dados, aplicações práticas de IA e automação de tarefas com foco em produtividade.</span>
+              </div>
+              <div class="fit">
+                <strong>Auditoria Interna</strong>
+                <span>Pensamento analítico, investigação de comportamento, organização de evidências e leitura de dados para apoiar decisões.</span>
+              </div>
+              <div class="fit">
+                <strong>Desenvolvimento de Software</strong>
+                <span>Construção de aplicações, interfaces, lógica de negócio, integração e experimentação de produtos.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container">
+        <div class="about">
+          <div>
+            <div class="section-kicker">Sobre mim</div>
+            <h2>Da infraestrutura ao produto.</h2>
+          </div>
+
+          <div class="about-box">
+            <p>
+              Sou profissional de Tecnologia, formado em Análise e Desenvolvimento de Sistemas e graduando em
+              Engenharia da Computação. Tenho experiência em desenvolvimento de software, integração de plataformas,
+              análise de sistemas, bancos de dados SQL, APIs REST, automação com Python e Shell Script e suporte em
+              ambientes de infraestrutura.
+            </p>
+            <div class="about-list">
+              <div class="about-item"><span class="dot"></span><div><strong>Formação em dados:</strong> BootCamp de Análise de Dados (Generation Brasil) e Certificado Profissional de Análise de Dados do Google.</div></div>
+              <div class="about-item"><span class="dot"></span><div><strong>Base técnica:</strong> Engenharia da Computação (UNIVESP), ADS concluído e formação técnica em Informática.</div></div>
+              <div class="about-item"><span class="dot"></span><div><strong>Experiência:</strong> e-commerce, suporte N2, infraestrutura, bancos de dados, automação e integração de sistemas.</div></div>
+              <div class="about-item"><span class="dot"></span><div><strong>Estilo de trabalho:</strong> perfil analítico, colaborativo, orientado a resultados e com facilidade de aprendizado.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <span>© 2026 Alef Rezzo dos Reis</span>
+      <span>Portfólio • Tecnologia, Dados, Automação e IA</span>
+    </div>
+  </footer>
+</body>
+</html>
