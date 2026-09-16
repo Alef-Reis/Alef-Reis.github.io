@@ -151,9 +151,6 @@
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow);
-      min-height: 350px;
-      display: grid;
-      grid-template-rows: 1fr auto;
       position: relative;
       isolation: isolate;
     }
@@ -161,13 +158,14 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(17,19,26,0) 38%, rgba(17,19,26,.95) 88%);
+      background: linear-gradient(180deg, rgba(17,19,26,0) 42%, rgba(17,19,26,.95) 90%);
       z-index: 1;
       pointer-events: none;
     }
     .profile-photo {
       width: 100%;
-      height: 300px;
+      aspect-ratio: 1 / 1;
+      height: auto;
       object-fit: cover;
       object-position: center;
       background: #20222b;
@@ -176,7 +174,7 @@
       position: relative;
       z-index: 2;
       padding: 18px;
-      margin-top: -4px;
+      margin-top: -46px;
     }
     .profile-role {
       color: #d5d5ff;
@@ -241,7 +239,7 @@
       color: var(--muted);
     }
 
-    /* YouTube-like project grid */
+    /* YouTube-like project grid com Efeito 3D de Gradiente */
     .video-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -249,24 +247,63 @@
     }
     .video-card {
       display: block;
-      group: true;
       cursor: pointer;
+      perspective: 1000px;
     }
     .thumb {
       position: relative;
       aspect-ratio: 16 / 9;
       border-radius: 18px;
       overflow: hidden;
-      background: var(--ink-2);
-      box-shadow: 0 10px 28px rgba(17,19,26,.12);
-      border: 1px solid rgba(17,19,26,.08);
+      background: #10121b;
+      box-shadow: 0 10px 28px rgba(17,19,26,.14);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: transform .45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .45s cubic-bezier(0.16, 1, 0.3, 1);
+      isolation: isolate;
     }
+
+    /* Camada dinâmica 3D que se move no hover */
+    .thumb::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background:
+        radial-gradient(circle at 76% 23%, rgba(119,119,255,.82), transparent 32%),
+        radial-gradient(circle at 35% 64%, rgba(63,63,227,.95), transparent 28%),
+        linear-gradient(135deg, #10121b 0%, #23254d 100%);
+      background-size: 130% 130%;
+      background-position: 50% 50%;
+      opacity: 0.7;
+      transform: scale(1);
+      transition: transform .6s cubic-bezier(0.16, 1, 0.3, 1), 
+                  background-position .6s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity .45s ease;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Iluminação suave e vinheta sobreposta */
     .thumb::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.22));
+      background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(16,18,27,.42) 100%);
+      z-index: 1;
+      pointer-events: none;
     }
+
+    /* Efeito ao passar o mouse */
+    .video-card:hover .thumb {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 20px 42px rgba(63,63,227,.24), 0 12px 24px rgba(17,19,26,.2);
+      border-color: rgba(119,119,255,.35);
+    }
+    .video-card:hover .thumb::before {
+      opacity: 1;
+      transform: scale(1.15);
+      background-position: 30% 70%;
+    }
+
     .thumb-top,
     .thumb-bottom {
       position: absolute;
@@ -286,6 +323,7 @@
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: .08em;
+      backdrop-filter: blur(4px);
     }
     .thumb-title {
       color: #fff;
@@ -294,6 +332,7 @@
       font-weight: 950;
       letter-spacing: -.055em;
       max-width: 80%;
+      text-shadow: 0 2px 10px rgba(0,0,0,.3);
     }
     .thumb-watermark {
       position: absolute;
@@ -303,6 +342,7 @@
       font-weight: 900;
       font-size: .74rem;
       z-index: 2;
+      letter-spacing: .05em;
     }
     .card-body {
       padding: 13px 2px 0;
@@ -329,11 +369,9 @@
       border-radius: 999px;
       background: var(--blue-soft);
       color: #3433ae;
-      font-weight: 800;
+      font-weight: 850;
       font-size: .72rem;
     }
-    .video-card:hover .thumb { transform: translateY(-2px); }
-    .thumb { transition: transform .2s ease; }
 
     .featured .video-grid {
       grid-template-columns: repeat(2, minmax(0,1fr));
@@ -468,7 +506,7 @@
 
     @media (max-width: 900px) {
       .hero-grid, .why-grid, .about { grid-template-columns: 1fr; }
-      .profile-card { width: min(100%, 340px); min-height: 390px; justify-self: center; }
+      .profile-card { width: min(100%, 320px); justify-self: center; }
       .video-grid, .featured .video-grid { grid-template-columns: 1fr; }
       .secondary-grid { grid-template-columns: 1fr; }
       .signal-row { grid-template-columns: 1fr; }
@@ -530,7 +568,7 @@
           </div>
 
           <aside class="profile-card" aria-label="Perfil">
-            <img class="profile-photo" src="assets/alef-profile.png" alt="Foto profissional de Alef Rezzo dos Reis">
+            <img class="profile-photo" src="https://raw.githubusercontent.com/Alef-Reis/Alef-Reis.github.io/refs/heads/main/assets/alef-profile.jpeg" alt="Foto profissional de Alef Rezzo dos Reis">
             <div class="profile-overlay">
               <div class="profile-role">Analista de Sistemas</div>
               <div class="profile-name">Tecnologia • Dados • Automação • IA</div>
@@ -555,7 +593,7 @@
 
         <div class="video-grid">
           <a class="video-card" href="https://autocompara-sable.vercel.app/" target="_blank" rel="noreferrer">
-            <div class="thumb" style="background: linear-gradient(135deg, #161924 0%, #3233c6 58%, #6262ff 100%);">
+            <div class="thumb">
               <div class="thumb-top"><span class="thumb-badge">Generation Brasil • Data</span></div>
               <div class="thumb-bottom">
                 <div class="thumb-title">COMPARE.<br>DECIDA.<br>DIRIJA.</div>
@@ -575,10 +613,7 @@
           </a>
 
           <a class="video-card" href="https://mindmap-ghost.netlify.app/app" target="_blank" rel="noreferrer">
-            <div class="thumb" style="background:
-              radial-gradient(circle at 76% 23%, rgba(119,119,255,.75), transparent 28%),
-              radial-gradient(circle at 35% 64%, rgba(63,63,227,.9), transparent 24%),
-              linear-gradient(135deg, #10121b 0%, #23254d 100%);">
+            <div class="thumb">
               <div class="thumb-top"><span class="thumb-badge">Automação • IA</span></div>
               <div class="thumb-bottom">
                 <div class="thumb-title">DO PROMPT<br>AO MAPA.</div>
@@ -598,7 +633,7 @@
           </a>
 
           <a class="video-card" href="https://estudodecaso-efeitofancy-22ndwiuvnzykyd8hqfreyt.streamlit.app/" target="_blank" rel="noreferrer">
-            <div class="thumb" style="background: linear-gradient(135deg, #1a1b23 0%, #4850aa 54%, #8a8bff 100%);">
+            <div class="thumb">
               <div class="thumb-top"><span class="thumb-badge">Estudo de caso • Streamlit</span></div>
               <div class="thumb-bottom">
                 <div class="thumb-title">EFEITO<br>FANCY</div>
@@ -617,7 +652,7 @@
           </a>
 
           <a class="video-card" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQbQKior_3ifQKCRko-ZcR8HT4jFeEBr59JE3hHms0AxgGkLDnoor0NkwBO-R2yxBLG_9objTQrNAjW/pubhtml" target="_blank" rel="noreferrer">
-            <div class="thumb" style="background: linear-gradient(135deg, #1c1f24 0%, #4f5562 55%, #858da0 100%);">
+            <div class="thumb">
               <div class="thumb-top"><span class="thumb-badge">Google Sheets • Prática</span></div>
               <div class="thumb-bottom">
                 <div class="thumb-title">FÓRMULAS<br>QUE RESOLVEM.</div>
@@ -685,8 +720,10 @@
             <div>
               <div class="section-kicker" style="color:#a5a5ff;">Como eu trabalho</div>
               <h2>Três frentes. Uma mesma forma de pensar.</h2>
-              <p class="why-sub"> Menos foco em listas de tecnologias e mais evidências de comportamento: investigar a raiz dos problemas, 
-                transformar dados em decisões, automatizar processos e entregar soluções reais que geram valor para o negócio. </p>
+              <p class="why-sub">
+                Menos foco em listas de tecnologias e mais evidências de comportamento: investigar a raiz dos problemas, 
+                transformar dados em decisões, automatizar processos e entregar soluções reais que geram valor para o negócio.
+              </p>
               <div class="tools" aria-label="Ferramentas de IA utilizadas">
                 <span class="tool">Claude</span>
                 <span class="tool">Grok</span>
